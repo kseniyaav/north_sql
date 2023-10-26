@@ -10,8 +10,8 @@ with psycopg2.connect(host='localhost', database='north', user='postgres', passw
             csv_reader = csv.reader(csv_file)
             next(csv_reader, None)
             for row in csv_reader:
-                cur.execute("INSERT INTO employees VALUES (%s, %s, %s, %s, %s, %s)", (
-                        row['employee_id'], row['first_name'], row['last_name'], row['title'], row['birth_date'], row['notes']))
+                cur.execute('INSERT INTO employees VALUES(%s, %s, %s, %s, %s, %s)',
+                               (row[0], row[1], row[2], row[3], row[4], row[5]))
 
         # Commit the changes to the database
         conn.commit()
@@ -21,8 +21,8 @@ with psycopg2.connect(host='localhost', database='north', user='postgres', passw
             csv_reader = csv.reader(csv_file)
             next(csv_reader, None)
             for row in csv_reader:
-                cur.execute("INSERT INTO employees VALUES (%s, %s, %s)", (
-                    row['customer_id'], row['company_name'], row['company_name']))
+                cur.execute('INSERT INTO customers VALUES(%s, %s, %s)',
+                            (row[0], row[1], row[2]))
 
         # Commit the changes to the database
         conn.commit()
@@ -32,8 +32,8 @@ with psycopg2.connect(host='localhost', database='north', user='postgres', passw
             csv_reader = csv.reader(csv_file)
             next(csv_reader, None)
             for row in csv_reader:
-                cur.execute("INSERT INTO employees VALUES (%s, %s, %s, %s, %s)", (
-                    row['order_id'], row['customer_id'], row['employee_id'], row['order_date'], row['ship_city']))
+                cur.execute('INSERT INTO orders VALUES(%s, %s, %s, %s, %s)',
+                            (row[0], row[1], row[2], row[3], row[4]))
 
         # Commit the changes to the database
         conn.commit()
